@@ -1,19 +1,19 @@
 "use strict"
 
-// if ("Promise" in window === false)
+if ("Promise" in window === false)
   window.Promise =
 
 function(executor){
   var ok = null;
-  var args;
-  this.resolve = function(){
+  var parameter;
+  this.resolve = function(e){
     ok = true;
-    args = arguments;
+    parameter = e;
     runQueue(thenArr);
   };
-  this.reject = function(){
+  this.reject = function(e){
     ok = false;
-    args = arguments;
+    parameter = e;
     runQueue(catchArr);
   };
 
@@ -21,7 +21,7 @@ function(executor){
   var thenArr = [];
   this.then = function(f){
     if (ok === true){
-      f.apply(this, args);
+      f(parameter);
     } else if (ok === null) {
       thenArr.push(f);
     }
@@ -31,7 +31,7 @@ function(executor){
   var catchArr = [];
   this.catch = function(f){
     if (ok === false){
-      f.apply(this, args);
+      f(parameter);
     } else if (ok === null) {
       catchArr.push(f);
     }
@@ -40,7 +40,7 @@ function(executor){
 
   this.chain = function(f){
     if (ok !== null){
-      f.apply(this, args);
+      f(parameter);
     } else {
       thenArr.push(f);
       catchArr.push(f);
@@ -52,6 +52,6 @@ function(executor){
 
   function runQueue(fns){
     for (var i = 0; i < fns.length; ++i)
-      fns[i].apply(this, args);
+      fns[i](parameter);
   }
 };
