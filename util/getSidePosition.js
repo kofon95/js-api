@@ -10,13 +10,13 @@ function getSidePosition(e){
   var pos;
 
   if (top) {
-    if (x > y) {
+    if (x >= y) {
       pos = "top";
     } else {
       pos = left ? "left" : "right"
     }
   } else {
-    if (x > y) {
+    if (x >= y) {
       pos = "bottom"
     } else {
       pos = left ? "left" : "right"
