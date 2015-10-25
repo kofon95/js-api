@@ -1,14 +1,10 @@
 "use strict"
 // using jQuery (ajax)
 
-var YA_Translator = {};
-// getLang: return promise
-// translate: return promise
+var YA_Translator = {
+	key: "trnsl.1.1.20151020T033847Z.922fc037e11613df.7952c12e9932e591e6b9a28a129ee588fdd94515",
 
-(function(){
-	var key = "trnsl.1.1.20151020T033847Z.922fc037e11613df.7952c12e9932e591e6b9a28a129ee588fdd94515";
-
-	YA_Translator.getLang = function(text){
+	getLang: function(text){
 		return new Promise(function(resolve, reject){
 			$.ajax({
 				url: "https://translate.yandex.net/api/v1.5/tr.json/detect?text=" + text + "&key=" + key,
@@ -19,9 +15,9 @@ var YA_Translator = {};
 					reject(err);
 				}});
 		});
-	}
+	},
 
-	YA_Translator.translate = function(text, lang){
+	translate: function(text, lang){
 		lang = lang || "en";
 
 		return new Promise(function(resolve, reject){
@@ -36,4 +32,4 @@ var YA_Translator = {};
 			});
 		})
 	}
-})()
+}
