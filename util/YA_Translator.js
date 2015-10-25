@@ -1,7 +1,7 @@
 "use strict"
 // using jQuery (ajax)
 
-var YA_Translator;
+var YA_Translator = {};
 // getLang: return promise
 // translate: return promise
 
