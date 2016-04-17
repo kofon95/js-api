@@ -1,0 +1,46 @@
+<html>
+
+<head>
+<style>
+li{
+	list-style-type: none;
+}
+
+.accardion > *{
+	border: 1px solid blue;
+	transition: 1s;
+}
+.openable{
+	height: 40px;
+}
+.openable.opened{
+	height: 200px;
+}
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+	<ul id="accardion" class="accardion close-tab" >
+		<li class="openable" ><div>first</div></li>
+		<li class="openable opened" >second</li>
+		<li class="openable" ><p>third</p></li>
+		<li class="openable" ><span>fourth</span></li>
+	</ul>
+	
+<script>
+	var accardion = $(".accardion");
+	accardion.click(function(e){
+		var thisTab = $(e.target).closest(".openable");
+		if (thisTab.length === 0) return;
+		
+		if (!thisTab.hasClass("opened")) {
+			accardion.children().removeClass("opened");
+			thisTab.addClass("opened");
+		} else if  (accardion.hasClass("close-tab")){
+			accardion.children().removeClass("opened");
+		}
+	});
+</script>
+</body>
+</html>
